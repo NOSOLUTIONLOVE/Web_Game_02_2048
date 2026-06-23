@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * 全局样式 - 暗黑紫调（外层 UI）
+ * 方块区使用 2048 经典暖色，在 Board 组件中独立处理
+ */
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+    width: 100%;
+  }
+
+  body {
+    background: hsl(240 10% 3.9%);
+    color: hsl(0 0% 98%);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  /* 毛玻璃效果 */
+  .glass {
+    @apply backdrop-blur-xl bg-white/5 border border-white/10;
+  }
+
+  /* 文字发光 */
+  .text-glow {
+    text-shadow: 0 0 12px currentColor;
+  }
+
+  /* 2048 方块区背景色（经典 #faf8ef 暖色） */
+  .board-bg {
+    background-color: #bbada0;
+  }
+}
