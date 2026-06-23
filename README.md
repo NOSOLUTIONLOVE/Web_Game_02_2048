@@ -2,7 +2,7 @@
 
 # 2048 Web Game
 
-> 经典 2048 数字合成游戏的现代 Web 实现，采用 React + TypeScript + Zustand 架构，支持多网格尺寸、主题切换、连击系统、撤销机制与音效合成。
+> A modern web implementation of the classic 2048 number-merging game, built with React + TypeScript + Zustand. Features multiple grid sizes, theme switching, combo system, undo mechanism, and synthesized sound effects.
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4-3178c6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -16,76 +16,78 @@
 
 [Live Demo](https://game-2048.vercel.app) · [Features](#-features) · [Quick Start](#-quick-start) · [Architecture](#-architecture) · [License](#-license)
 
+**[中文文档](README_CN.md)**
+
 </div>
 
 ---
 
-## 📋 项目概述
+## Overview
 
-本项目是经典 2048 数字合成游戏的完整 Web 实现，作为个人作品集项目（Web_Game 系列 #2）开发。项目从零开始设计并实现，涵盖产品需求分析、技术选型、架构设计、核心算法、UI 交互、音效系统、单元测试到生产部署的完整工程链路。
+This project is a complete web implementation of the classic 2048 number-merging game, developed as a portfolio project (Web_Game series #2). It covers the full engineering pipeline from product requirements analysis, technology selection, architecture design, core algorithms, UI interaction, audio system, unit testing, to production deployment.
 
-**核心亮点**：
-- 基于 **三层架构**（Engine / State / UI）实现关注点分离，游戏引擎零 React 依赖，可独立测试与复用
-- 支持 **三种网格尺寸**（4×4 / 5×5 / 6×6）与 **三种主题**（经典暖色 / 暗夜霓虹 / 纯净极简），满足不同难度与审美偏好
-- 自研 **连击奖励系统** 与 **撤销机制**，配合 Web Audio API 合成的 6 种音效，提供丰富的游戏反馈
-- 全链路 TypeScript 严格模式 + Zod 运行时校验，16+ 单元测试覆盖核心算法
-- 纯静态部署，零后端依赖，localStorage 持久化所有用户偏好与统计数据
+**Highlights**:
+- **Three-Layer Architecture** (Engine / State / UI) with strict separation of concerns — the game engine has zero React dependency, enabling independent testing and reuse
+- **Three grid sizes** (4x4 / 5x5 / 6x6) and **three themes** (Classic Warm / Neon Dark / Minimal Light) to suit different difficulty levels and aesthetic preferences
+- Custom **Combo Reward System** and **Undo Mechanism**, paired with 6 synthesized sound effects via Web Audio API for rich game feedback
+- Full-chain TypeScript strict mode + Zod runtime validation, with 16+ unit tests covering core algorithms
+- Fully static deployment with zero backend dependency — localStorage persists all user preferences and statistics
 
-### 📖 项目文档
+### Project Documentation
 
-本项目包含完整的工程文档，记录了从立项到部署的全过程：
+This project includes comprehensive engineering documentation covering the entire process from inception to deployment:
 
-| 文档 | 内容 |
-|------|------|
-| [PRD-2048](../PRD-2048.md) | 产品需求文档 — 背景、目标用户、核心玩法、功能需求、验收标准 |
-| [01 - 项目立项](docs/01-项目立项.md) | 立项书 — 项目定位、技术约束、风险评估 |
-| [02 - 需求拆分](docs/02-需求拆分.md) | 任务清单 — MVP 与 V2 扩展功能拆解 |
-| [03 - 技术选型](docs/03-技术选型.md) | 技术决策 — 渲染方案、状态管理、动画、音效等选型对比 |
-| [04 - 项目架构](docs/04-项目架构.md) | 代码组织 — 三层架构设计、模块详解、数据流图、设计模式 |
-| [05 - 执行规划](docs/05-执行规划.md) | 迭代计划 — 分阶段开发目标与里程碑 |
-| [06 - 部署指南](docs/06-部署指南.md) | 部署方案 — Vercel 配置、缓存策略、安全头 |
-
----
-
-## ✨ Features
-
-### 🎮 Core Gameplay
-- **Classic 2048 Mechanics** - Slide tiles in four directions to merge matching numbers
-- **Multiple Grid Sizes** - Choose between 4×4 (classic), 5×5 (spacious), or 6×6 (challenge)
-- **Dynamic Win Conditions** - Each grid size has its own target: 2048, 4096, or 8192
-- **Continue After Winning** - Push beyond 2048 to chase higher scores
-
-### 🎯 Advanced Mechanics
-- **Undo System** - Up to 20 undo steps (configurable: 5/10/20)
-- **Combo System** - Chain multiple merges in one move for score multipliers (1.5×, 2×, 3×)
-- **High Score Persistence** - LocalStorage saves your best scores per grid size
-- **Game Statistics** - Track games played, total moves, max tile achieved, and mode-specific records
-
-### 🎨 Visual & Audio
-- **Three Themes** - Classic Warm, Neon Dark, Minimal Light (instant switching)
-- **Smooth Animations** - Framer Motion powers tile movements, merges, and spawns
-- **Particle Effects** - DOM-based particle bursts on tile merges
-- **Synthesized Sound Effects** - Web Audio API generates 6 distinct sounds (move/merge/spawn/win/lose/click)
-- **Volume Control** - Adjustable 0-100% with persistent preference
-
-### 📱 Accessibility & UX
-- **Keyboard Controls** - Arrow keys, WASD, Z (undo), R (reset), P (pause), Space (start)
-- **Touch Support** - Swipe gestures with 30px threshold to prevent accidental inputs
-- **Pause System** - Pause/resume anytime, auto-pause on tab switch
-- **Countdown Start** - 3-2-1-GO sequence before each game
-- **Responsive Design** - Works on desktop and mobile devices
-- **Screen Reader Support** - aria-live announcements for score changes
-
-### 🛠 Technical Highlights
-- **Three-Layer Architecture** - Engine (pure TS) / State (Zustand) / UI (React)
-- **Zero Backend** - Fully static, localStorage for persistence
-- **TypeScript Strict Mode** - Full type safety with Zod runtime validation
-- **Unit Tested** - 16+ tests covering core algorithms (Vitest)
-- **Performance Optimized** - <16ms move response, <30MB memory usage
+| Document | Description |
+|----------|-------------|
+| [PRD-2048](PRD-2048.md) | Product Requirements — Background, target users, core gameplay, feature specs, acceptance criteria |
+| [01 - Project Inception](2048/docs/01-项目立项.md) | Project charter — Positioning, technical constraints, risk assessment |
+| [02 - Requirements Breakdown](2048/docs/02-需求拆分.md) | Task list — MVP and V2 feature decomposition |
+| [03 - Technology Selection](2048/docs/03-技术选型.md) | Tech decisions — Rendering, state management, animation, audio comparison |
+| [04 - Project Architecture](2048/docs/04-项目架构.md) | Code organization — Three-layer design, module details, data flow, design patterns |
+| [05 - Execution Plan](2048/docs/05-执行规划.md) | Iteration plan — Phased development goals and milestones |
+| [06 - Deployment Guide](2048/docs/06-部署指南.md) | Deployment — Vercel config, caching strategy, security headers |
 
 ---
 
-## 🚀 Quick Start
+## Features
+
+### Core Gameplay
+- **Classic 2048 Mechanics** — Slide tiles in four directions to merge matching numbers
+- **Multiple Grid Sizes** — Choose between 4x4 (classic), 5x5 (spacious), or 6x6 (challenge)
+- **Dynamic Win Conditions** — Each grid size has its own target: 2048, 4096, or 8192
+- **Continue After Winning** — Push beyond 2048 to chase higher scores
+
+### Advanced Mechanics
+- **Undo System** — Up to 20 undo steps (configurable: 5/10/20)
+- **Combo System** — Chain multiple merges in one move for score multipliers (1.5x, 2x, 3x)
+- **High Score Persistence** — LocalStorage saves your best scores per grid size
+- **Game Statistics** — Track games played, total moves, max tile achieved, and mode-specific records
+
+### Visual & Audio
+- **Three Themes** — Classic Warm, Neon Dark, Minimal Light (instant switching)
+- **Smooth Animations** — Framer Motion powers tile movements, merges, and spawns
+- **Particle Effects** — DOM-based particle bursts on tile merges
+- **Synthesized Sound Effects** — Web Audio API generates 6 distinct sounds (move/merge/spawn/win/lose/click)
+- **Volume Control** — Adjustable 0-100% with persistent preference
+
+### Accessibility & UX
+- **Keyboard Controls** — Arrow keys, WASD, Z (undo), R (reset), P (pause), Space (start)
+- **Touch Support** — Swipe gestures with 30px threshold to prevent accidental inputs
+- **Pause System** — Pause/resume anytime, auto-pause on tab switch
+- **Countdown Start** — 3-2-1-GO sequence before each game
+- **Responsive Design** — Works on desktop and mobile devices
+- **Screen Reader Support** — aria-live announcements for score changes
+
+### Technical Highlights
+- **Three-Layer Architecture** — Engine (pure TS) / State (Zustand) / UI (React)
+- **Zero Backend** — Fully static, localStorage for persistence
+- **TypeScript Strict Mode** — Full type safety with Zod runtime validation
+- **Unit Tested** — 16+ tests covering core algorithms (Vitest)
+- **Performance Optimized** — <16ms move response, <30MB memory usage
+
+---
+
+## Quick Start
 
 ### Prerequisites
 - Node.js 18+
@@ -118,37 +120,37 @@ Output: `dist/` directory (ready for static hosting)
 
 ---
 
-## 📖 How to Play
+## How to Play
 
 ### Controls
 
 | Action | Keyboard | Touch |
 |--------|----------|-------|
-| Move tiles | ↑ ↓ ← → or W A S D | Swipe (30px min) |
-| Undo | Z | - |
-| Reset | R | - |
-| Pause | P or Esc | - |
-| Start/Confirm | Space or Enter | Tap button |
+| Move tiles | Arrow keys or WASD | Swipe (30px min) |
+| Undo | Z | — |
+| Reset | R | — |
+| Pause | P or Esc | — |
+| Start / Confirm | Space or Enter | Tap button |
 
 ### Game Rules
 
 1. **Slide** tiles in any of four directions
 2. **Merge** tiles with the same number when they collide
 3. **Score** points equal to the merged tile value (e.g., 2+2=4 scores 4 points)
-4. **Win** by reaching the target tile (2048 for 4×4, 4096 for 5×5, 8192 for 6×6)
+4. **Win** by reaching the target tile (2048 for 4x4, 4096 for 5x5, 8192 for 6x6)
 5. **Lose** when the grid is full and no merges are possible
 6. **Combo** bonus: multiple merges in one move multiply your score
 
 ### Scoring
 
 - Base score: sum of merged tiles
-- Combo 2 (2 merges): 1.5× multiplier
-- Combo 3 (3 merges): 2× multiplier
-- Combo 4+ (4+ merges): 3× multiplier
+- Combo 2 (2 merges): 1.5x multiplier
+- Combo 3 (3 merges): 2x multiplier
+- Combo 4+ (4+ merges): 3x multiplier
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 | Layer | Technology | Purpose |
 |-------|-----------|---------|
@@ -167,39 +169,39 @@ Output: `dist/` directory (ready for static hosting)
 
 ---
 
-## 🏗 Architecture
+## Architecture
 
 ### Three-Layer Design
 
 ```
-┌─────────────────────────────────────────┐
-│ UI Layer (React Components)             │
-│  ├─ 2048Game (mount + Context)          │
-│  ├─ Board / Tile / HUD / Overlays       │
-│  └─ SettingsPanel                       │
-│       ↕ useGameStore (subscribe)        │
-├─────────────────────────────────────────┤
-│ State Layer (Zustand)                   │
-│  ├─ phase / grid / score / moves        │
-│  ├─ highScore (persisted)               │
-│  └─ actions (applyBoard, setPhase)      │
-│       ↕ callbacks                       │
-├─────────────────────────────────────────┤
-│ Engine Layer (Pure TypeScript)          │
-│  ├─ GameEngine (state machine)          │
-│  ├─ Board (grid logic + undo)           │
-│  ├─ Input (keyboard + touch)            │
-│  └─ AudioSystem (Web Audio synthesis)   │
-└─────────────────────────────────────────┘
++-------------------------------------------+
+| UI Layer (React Components)               |
+|  +- 2048Game (mount + Context)            |
+|  +- Board / Tile / HUD / Overlays         |
+|  +- SettingsPanel                         |
+|       | useGameStore (subscribe)          |
++-------------------------------------------+
+| State Layer (Zustand)                     |
+|  +- phase / grid / score / moves          |
+|  +- highScore (persisted)                 |
+|  +- actions (applyBoard, setPhase)        |
+|       | callbacks                         |
++-------------------------------------------+
+| Engine Layer (Pure TypeScript)            |
+|  +- GameEngine (state machine)            |
+|  +- Board (grid logic + undo)             |
+|  +- Input (keyboard + touch)              |
+|  +- AudioSystem (Web Audio synthesis)     |
++-------------------------------------------+
 ```
 
 ### Key Design Patterns
 
-- **State Machine** - 6 game phases: menu → countdown → playing → paused → won → over
-- **Observer Pattern** - Engine callbacks decouple from store
-- **Immutable Style** - Board.move() returns new state, enables undo
-- **Context API** - Engine instance shared across components
-- **Strategy Pattern** - CONFIG object for runtime parameters
+- **State Machine** — 6 game phases: menu -> countdown -> playing -> paused -> won -> over
+- **Observer Pattern** — Engine callbacks decouple from store
+- **Immutable Style** — Board.move() returns new state, enables undo
+- **Context API** — Engine instance shared across components
+- **Strategy Pattern** — CONFIG object for runtime parameters
 
 ### Core Algorithms
 
@@ -217,76 +219,76 @@ Output: `dist/` directory (ready for static hosting)
 
 ---
 
-## 📦 Project Structure
+## Project Structure
 
 ```
 2048/
-├── docs/                    # Project documentation
-│   ├── 01-项目立项.md
-│   ├── 02-需求拆分.md
-│   ├── 03-技术选型.md
-│   ├── 04-项目架构.md
-│   ├── 05-执行规划.md
-│   └── 06-部署指南.md
-│
-├── src/
-│   ├── config/              # Global config + Zod schemas
-│   │   └── index.ts
-│   │
-│   ├── engine/              # Game engine (pure TS)
-│   │   ├── Board.ts         # Grid logic + merge + undo
-│   │   ├── GameEngine.ts    # State machine + orchestration
-│   │   ├── Input.ts         # Keyboard + touch input
-│   │   └── __tests__/       # Unit tests (16+ cases)
-│   │
-│   ├── lib/                 # Utilities
-│   │   ├── audio.ts         # AudioSystem (Web Audio API)
-│   │   ├── storage.ts       # localStorage wrapper
-│   │   └── utils.ts         # cn() helper
-│   │
-│   ├── store/               # Zustand store
-│   │   └── useGameStore.ts  # Global state + persistence
-│   │
-│   ├── components/          # UI components
-│   │   ├── 2048Game.tsx     # Engine mount + Context
-│   │   ├── Board.tsx        # Grid container + touch binding
-│   │   ├── Tile.tsx         # Single tile + animations
-│   │   ├── HUD.tsx          # Score bar + controls
-│   │   ├── Overlays.tsx     # Phase-based overlays
-│   │   ├── MainMenu.tsx     # Start screen + stats
-│   │   ├── SettingsPanel.tsx # Grid/theme/audio settings
-│   │   ├── Particles.tsx    # Merge particle effects
-│   │   └── ui/              # shadcn/ui primitives
-│   │
-│   ├── App.tsx              # Root component
-│   ├── main.tsx             # Entry point
-│   └── index.css            # Global styles
-│
-├── public/                  # Static assets
-├── vercel.json              # Vercel deployment config
-├── package.json
-├── tsconfig.json
-├── tailwind.config.ts
-└── vite.config.ts
++-- docs/                    # Project documentation
+|   +-- 01-项目立项.md
+|   +-- 02-需求拆分.md
+|   +-- 03-技术选型.md
+|   +-- 04-项目架构.md
+|   +-- 05-执行规划.md
+|   +-- 06-部署指南.md
+|
++-- src/
+|   +-- config/              # Global config + Zod schemas
+|   |   +-- index.ts
+|   |
+|   +-- engine/              # Game engine (pure TS)
+|   |   +-- Board.ts         # Grid logic + merge + undo
+|   |   +-- GameEngine.ts    # State machine + orchestration
+|   |   +-- Input.ts         # Keyboard + touch input
+|   |   +-- __tests__/       # Unit tests (16+ cases)
+|   |
+|   +-- lib/                 # Utilities
+|   |   +-- audio.ts         # AudioSystem (Web Audio API)
+|   |   +-- storage.ts       # localStorage wrapper
+|   |   +-- utils.ts         # cn() helper
+|   |
+|   +-- store/               # Zustand store
+|   |   +-- useGameStore.ts  # Global state + persistence
+|   |
+|   +-- components/          # UI components
+|   |   +-- 2048Game.tsx     # Engine mount + Context
+|   |   +-- Board.tsx        # Grid container + touch binding
+|   |   +-- Tile.tsx         # Single tile + animations
+|   |   +-- HUD.tsx          # Score bar + controls
+|   |   +-- Overlays.tsx     # Phase-based overlays
+|   |   +-- MainMenu.tsx     # Start screen + stats
+|   |   +-- SettingsPanel.tsx # Grid/theme/audio settings
+|   |   +-- Particles.tsx    # Merge particle effects
+|   |   +-- ui/              # shadcn/ui primitives
+|   |
+|   +-- App.tsx              # Root component
+|   +-- main.tsx             # Entry point
+|   +-- index.css            # Global styles
+|
++-- public/                  # Static assets
++-- vercel.json              # Vercel deployment config
++-- package.json
++-- tsconfig.json
++-- tailwind.config.ts
++-- vite.config.ts
 ```
 
 ---
 
-## 🎯 Features Breakdown
+## Features Breakdown
 
 ### Grid Sizes
 
 | Size | Target | Difficulty | Strategy |
 |------|--------|------------|----------|
-| 4×4 | 2048 | Classic | Corner stacking |
-| 5×5 | 4096 | Spacious | More room, higher target |
-| 6×6 | 8192 | Challenge | Complex merges required |
+| 4x4 | 2048 | Classic | Corner stacking |
+| 5x5 | 4096 | Spacious | More room, higher target |
+| 6x6 | 8192 | Challenge | Complex merges required |
 
 ### Themes
 
-- **Classic Warm** - Traditional 2048 palette (#bbada0 board, warm tile colors)
-- **Neon Dark** - Cyberpunk aesthetic (dark purple background, glowing accents)
-- **Minimal Light** - Clean and bright (white background, subtle grays)
+- **Classic Warm** — Traditional 2048 palette (#bbada0 board, warm tile colors)
+- **Neon Dark** — Cyberpunk aesthetic (dark purple background, glowing accents)
+- **Minimal Light** — Clean and bright (white background, subtle grays)
 
 ### Sound Effects
 
@@ -294,16 +296,16 @@ All synthesized via Web Audio API (no external files):
 
 | Event | Waveform | Duration |
 |-------|----------|----------|
-| Move | Sine 800→400Hz | 0.05s |
-| Merge | Triangle 200+value×8 Hz | 0.12s |
-| Spawn | Sine 1200→600Hz | 0.03s |
-| Win | Sine C5-E5-G5 (3 notes) | 0.3s×3 |
-| Lose | Sawtooth 440→110Hz | 0.4s |
+| Move | Sine 800->400Hz | 0.05s |
+| Merge | Triangle 200+value*8 Hz | 0.12s |
+| Spawn | Sine 1200->600Hz | 0.03s |
+| Win | Sine C5-E5-G5 (3 notes) | 0.3s x 3 |
+| Lose | Sawtooth 440->110Hz | 0.4s |
 | Click | Sine 600Hz | 0.04s |
 
 ---
 
-## 🧪 Testing
+## Testing
 
 Run the test suite:
 
@@ -316,48 +318,48 @@ Coverage includes:
 - Merge logic (single/multiple combos)
 - Undo system (stack limits, state restoration)
 - Win/lose conditions
-- Grid size variations (4×4, 5×5, 6×6)
+- Grid size variations (4x4, 5x5, 6x6)
 - Tile ID tracking (for animations)
 
 ---
 
-## 📊 Performance Metrics
+## Performance Metrics
 
 | Metric | Target | Actual |
 |--------|--------|--------|
-| JS bundle (gzip) | ≤200KB | 128KB ✅ |
-| CSS bundle (gzip) | ≤10KB | 4.4KB ✅ |
-| Total load | ≤500KB | 145KB ✅ |
-| First render | ≤1s | <500ms ✅ |
-| Move response | ≤50ms | <16ms ✅ |
-| Memory usage | ≤50MB | <30MB ✅ |
+| JS bundle (gzip) | <=200KB | 128KB |
+| CSS bundle (gzip) | <=10KB | 4.4KB |
+| Total load | <=500KB | 145KB |
+| First render | <=1s | <500ms |
+| Move response | <=50ms | <16ms |
+| Memory usage | <=50MB | <30MB |
 
 ---
 
-## 🔒 Privacy & Security
+## Privacy & Security
 
-- **Zero Data Collection** - No analytics, no tracking
-- **Local Storage Only** - High scores and preferences stay on your device
-- **No Third-Party Requests** - Fully self-contained
-- **No Cookies** - localStorage used instead
-- **XSS Protection** - Radix UI primitives prevent injection
+- **Zero Data Collection** — No analytics, no tracking
+- **Local Storage Only** — High scores and preferences stay on your device
+- **No Third-Party Requests** — Fully self-contained
+- **No Cookies** — localStorage used instead
+- **XSS Protection** — Radix UI primitives prevent injection
 
 ---
 
-## 🌐 Browser Compatibility
+## Browser Compatibility
 
 | Browser | Version | Status |
 |---------|---------|--------|
-| Chrome | 100+ | ✅ |
-| Edge | 100+ | ✅ |
-| Firefox | 100+ | ✅ |
-| Safari | 15+ | ✅ |
-| iOS Safari | 15+ | ✅ |
-| Android Chrome | 100+ | ✅ |
+| Chrome | 100+ | Supported |
+| Edge | 100+ | Supported |
+| Firefox | 100+ | Supported |
+| Safari | 15+ | Supported |
+| iOS Safari | 15+ | Supported |
+| Android Chrome | 100+ | Supported |
 
 ---
 
-## 📚 Learn More
+## Learn More
 
 - [Original 2048 by Gabriele Cirulli](https://play2048.co/)
 - [React Documentation](https://reactjs.org/)
@@ -367,24 +369,24 @@ Coverage includes:
 
 ---
 
-## 📄 License
+## License
 
 This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
-- **Gabriele Cirulli** - Original 2048 game concept
-- **shadcn/ui** - Beautiful component primitives
-- **Radix UI** - Accessible uncontrolled components
-- **Tailwind CSS** - Utility-first styling
+- **Gabriele Cirulli** — Original 2048 game concept
+- **shadcn/ui** — Beautiful component primitives
+- **Radix UI** — Accessible uncontrolled components
+- **Tailwind CSS** — Utility-first styling
 
 ---
 
 <div align="center">
 
-**Built with ❤️ using React + TypeScript + Zustand**
+**Built with React + TypeScript + Zustand**
 
 [Live Demo](https://game-2048.vercel.app) · [Report Bug](https://github.com/NOSOLUTIONLOVE/Web_Game_02_2048/issues) · [Request Feature](https://github.com/NOSOLUTIONLOVE/Web_Game_02_2048/issues)
 
